@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Paleta de colores personalizada - Tanda 2 -->
+    <color name="color_primary">#7A1F2B</color>
+    <color name="color_primary_dark">#54141D</color>
+    <color name="color_secondary">#C58B2A</color>
+    <color name="color_background">#F7F3EC</color>
+    <color name="color_surface">#FFFFFF</color>
+    <color name="text_primary">#1F1F1F</color>
+    <color name="text_secondary">#595959</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="color_error">#B3261E</color>
+
+    <!-- Colores base necesarios -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

@@ -1,8 +1,24 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.ITANES_La_Libertad" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Colores Principales -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
+        <item name="colorPrimaryContainer">@color/color_primary_dark</item>
+
+        <!-- Colores Secundarios y Acentos -->
+        <item name="colorSecondary">@color/color_secondary</item>
+
+        <!-- Fondo y Superficies -->
+        <item name="android:windowBackground">@color/color_background</item>
+        <item name="colorSurface">@color/color_surface</item>
+
+        <!-- Errores -->
+        <item name="colorError">@color/color_error</item>
+
+        <!-- Personalización de textos base -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
     </style>
 
     <style name="Theme.ITANES_La_Libertad" parent="Base.Theme.ITANES_La_Libertad" />

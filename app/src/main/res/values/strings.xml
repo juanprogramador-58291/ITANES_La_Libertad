@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ITANES_La_Libertad</string>
+    <string name="app_name">ITANES_ La_Libertad</string>
+    <string name="tour_name">Ruta Histórica de La Libertad</string>
+    <string name="course_name">Trabajo Final - Desarrollo de Aplicaciones Móviles</string>
+    <string name="places_count">5 puntos turísticos</string>
+    <string name="explore_button">Explorar recorrido</string>
 </resources>

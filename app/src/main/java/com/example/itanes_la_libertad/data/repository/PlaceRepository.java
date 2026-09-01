@@ -25,13 +25,15 @@ public class PlaceRepository {
         return placeDao.getPlaceById(id);
     }
 
+    public int getCount() {
+        return placeDao.getCount();
+    }
+
     public void insertAll(List<PlaceEntity> places) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            placeDao.insertAll(places);
-        });
+        placeDao.insertAll(places);
     }
 
     public void deleteAll() {
-        AppDatabase.databaseWriteExecutor.execute(placeDao::deleteAll);
+        placeDao.deleteAll();
     }
 }

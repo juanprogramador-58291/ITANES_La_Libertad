@@ -42,6 +42,8 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.glide)
     implementation(libs.maplibre)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
     annotationProcessor(libs.room.compiler)
     annotationProcessor(libs.glide.compiler)
     testImplementation(libs.junit)

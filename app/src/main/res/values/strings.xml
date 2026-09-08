@@ -16,6 +16,9 @@
     <string name="share_chooser_title">Compartir lugar con...</string>
     <string name="share_error">No hay aplicaciones disponibles para compartir.</string>
     <string name="share_template">%1$s\n%2$s\n\nDirección:\n%3$s\n\nCompartido desde %4$s.</string>
+    <string name="map_title">Mapa del Lugar</string>
+    <string name="error_invalid_coords">Coordenadas del lugar no válidas.</string>
+    <string name="error_map_load">No se pudo cargar el mapa.</string>
     <string name="error_place_not_found">No se pudo encontrar la información del lugar.</string>
     <string name="error_invalid_id">ID de lugar no válido.</string>
 </resources>

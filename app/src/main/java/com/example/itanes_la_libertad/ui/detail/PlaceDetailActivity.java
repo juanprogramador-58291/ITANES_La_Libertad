@@ -16,6 +16,7 @@ import com.example.itanes_la_libertad.data.local.entity.FavoriteEntity;
 import com.example.itanes_la_libertad.data.local.entity.PlaceEntity;
 import com.example.itanes_la_libertad.data.repository.FavoriteRepository;
 import com.example.itanes_la_libertad.data.repository.PlaceRepository;
+import com.example.itanes_la_libertad.ui.map.MapActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +37,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
     private TextView textDetailLng;
     private Button buttonFavorite;
     private Button buttonShare;
+    private Button buttonMap;
 
     private boolean isFavorite = false;
     private int currentPlaceId = -1;
@@ -72,12 +74,18 @@ public class PlaceDetailActivity extends AppCompatActivity {
         textDetailLng = findViewById(R.id.textDetailLng);
         buttonFavorite = findViewById(R.id.buttonFavorite);
         buttonShare = findViewById(R.id.buttonShare);
+        buttonMap = findViewById(R.id.buttonMap);
         
         buttonFavorite.setOnClickListener(v -> toggleFavorite());
         buttonShare.setOnClickListener(v -> sharePlace());
-        
-        // Botón visual (sin funcionalidad aún)
-        findViewById(R.id.buttonMap);
+        buttonMap.setOnClickListener(v -> openMap());
+    }
+
+    private void openMap() {
+        if (currentPlaceId == -1) return;
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(EXTRA_PLACE_ID, currentPlaceId);
+        startActivity(intent);
     }
 
     private void sharePlace() {

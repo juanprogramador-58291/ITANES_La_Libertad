@@ -32,6 +32,11 @@
             android:name=".ui.detail.PlaceDetailActivity"
             android:exported="false"
             android:label="@string/detail_title" />
+
+        <activity
+            android:name=".ui.map.MapActivity"
+            android:exported="false"
+            android:label="@string/map_title" />
     </application>
 
 </manifest>

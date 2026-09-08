@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.room.runtime)
     implementation(libs.glide)
+    implementation(libs.maplibre)
     annotationProcessor(libs.room.compiler)
     annotationProcessor(libs.glide.compiler)
     testImplementation(libs.junit)

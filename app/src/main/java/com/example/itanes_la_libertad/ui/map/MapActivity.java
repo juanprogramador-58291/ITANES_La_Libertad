@@ -79,7 +79,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull MapLibreMap mapLibreMap) {
         this.mapLibreMap = mapLibreMap;
         
-        mapLibreMap.setStyle(new Style.Builder().fromUri("https://demotiles.maplibre.org/style.json"), style -> {
+        mapLibreMap.setStyle(new Style.Builder().fromUri("https://tiles.openfreemap.org/styles/liberty"), style -> {
             if (currentPlace != null) {
                 setupMapLocation();
             }

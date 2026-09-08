@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".PlacesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.detail.PlaceDetailActivity"
+            android:exported="false"
+            android:label="@string/detail_title" />
     </application>
 
 </manifest>

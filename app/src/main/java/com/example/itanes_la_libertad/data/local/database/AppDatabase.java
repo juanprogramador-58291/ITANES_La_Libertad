@@ -6,16 +6,19 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.itanes_la_libertad.data.local.dao.FavoriteDao;
 import com.example.itanes_la_libertad.data.local.dao.PlaceDao;
+import com.example.itanes_la_libertad.data.local.entity.FavoriteEntity;
 import com.example.itanes_la_libertad.data.local.entity.PlaceEntity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {PlaceEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {PlaceEntity.class, FavoriteEntity.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract PlaceDao placeDao();
+    public abstract FavoriteDao favoriteDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -28,6 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "itanes_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.itanes_la_libertad.R;
 import com.example.itanes_la_libertad.data.local.entity.PlaceEntity;
 
@@ -67,7 +68,13 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
         public void bind(PlaceEntity place, OnPlaceClickListener listener) {
             textPlaceName.setText(place.getName());
             textPlaceDescription.setText(place.getShortDescription());
-            imagePlace.setImageResource(R.drawable.ic_place_placeholder);
+
+            Glide.with(itemView.getContext())
+                    .load(place.getImageUrl())
+                    .placeholder(R.drawable.ic_place_placeholder)
+                    .error(R.drawable.ic_error_image)
+                    .centerCrop()
+                    .into(imagePlace);
 
             itemView.setOnClickListener(v -> {
                 if (listener != null) {

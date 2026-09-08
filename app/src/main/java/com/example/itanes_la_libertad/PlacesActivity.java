@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,13 @@ public class PlacesActivity extends AppCompatActivity implements PlaceAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
+        Toolbar toolbar = findViewById(R.id.toolbarPlaces);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         RecyclerView recyclerView = findViewById(R.id.recyclerPlaces);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         
@@ -34,6 +42,12 @@ public class PlacesActivity extends AppCompatActivity implements PlaceAdapter.On
         repository = new PlaceRepository(getApplication());
 
         loadPlaces();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void loadPlaces() {

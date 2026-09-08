@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.itanes_la_libertad.R;
@@ -48,6 +49,13 @@ public class PlaceDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_detail);
 
+        Toolbar toolbar = findViewById(R.id.toolbarDetail);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         initViews();
         repository = new PlaceRepository(getApplication());
         favoriteRepository = new FavoriteRepository(getApplication());
@@ -62,6 +70,12 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
         loadPlaceDetail(currentPlaceId);
         checkFavoriteStatus(currentPlaceId);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void initViews() {

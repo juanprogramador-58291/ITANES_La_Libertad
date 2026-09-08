@@ -21,4 +21,7 @@
     <string name="error_map_load">No se pudo cargar el mapa.</string>
     <string name="error_place_not_found">No se pudo encontrar la información del lugar.</string>
     <string name="error_invalid_id">ID de lugar no válido.</string>
+    <string name="zoom_in">Acercar mapa</string>
+    <string name="zoom_out">Alejar mapa</string>
+    <string name="back_description">Volver a la pantalla anterior</string>
 </resources>

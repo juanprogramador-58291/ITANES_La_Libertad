@@ -1,17 +1,18 @@
 package com.example.itanes_la_libertad.ui.map;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.itanes_la_libertad.R;
 import com.example.itanes_la_libertad.data.local.database.AppDatabase;
 import com.example.itanes_la_libertad.data.local.entity.PlaceEntity;
 import com.example.itanes_la_libertad.data.repository.PlaceRepository;
 import com.example.itanes_la_libertad.ui.detail.PlaceDetailActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.maplibre.android.MapLibre;
 import org.maplibre.android.annotations.MarkerOptions;
@@ -28,8 +29,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private MapView mapView;
     private MapLibreMap mapLibreMap;
     private PlaceRepository repository;
-    private TextView textMapPlaceName;
     private PlaceEntity currentPlace;
+    private FloatingActionButton fabZoomIn;
+    private FloatingActionButton fabZoomOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         setContentView(R.layout.activity_map);
 
-        textMapPlaceName = findViewById(R.id.textMapPlaceName);
+        Toolbar toolbar = findViewById(R.id.toolbarMap);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        fabZoomIn = findViewById(R.id.fabZoomIn);
+        fabZoomOut = findViewById(R.id.fabZoomOut);
+
+        fabZoomIn.setOnClickListener(v -> zoomIn());
+        fabZoomOut.setOnClickListener(v -> zoomOut());
 
         repository = new PlaceRepository(getApplication());
 
@@ -57,13 +71,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         loadPlaceData(placeId);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void loadPlaceData(int id) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             PlaceEntity place = repository.getPlaceById(id);
             runOnUiThread(() -> {
                 if (place != null) {
                     currentPlace = place;
-                    textMapPlaceName.setText(place.getName());
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle(place.getName());
+                    }
                     if (mapLibreMap != null) {
                         setupMapLocation();
                     }
@@ -93,6 +115,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (isValidCoordinate(lat, lng)) {
             LatLng location = new LatLng(lat, lng);
             
+            // Establecer límites de zoom
+            mapLibreMap.setMinZoomPreference(3.0);
+            mapLibreMap.setMaxZoomPreference(19.0);
+
             // Agregar marcador
             mapLibreMap.addMarker(new MarkerOptions()
                     .position(location)
@@ -107,6 +133,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mapLibreMap.animateCamera(CameraUpdateFactory.newCameraPosition(position));
         } else {
             Toast.makeText(this, R.string.error_invalid_coords, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void zoomIn() {
+        if (mapLibreMap != null) {
+            double currentZoom = mapLibreMap.getCameraPosition().zoom;
+            if (currentZoom < 19.0) {
+                mapLibreMap.animateCamera(CameraUpdateFactory.zoomIn());
+            }
+        }
+    }
+
+    private void zoomOut() {
+        if (mapLibreMap != null) {
+            double currentZoom = mapLibreMap.getCameraPosition().zoom;
+            if (currentZoom > 3.0) {
+                mapLibreMap.animateCamera(CameraUpdateFactory.zoomOut());
+            }
         }
     }
 

@@ -7,28 +7,15 @@
     android:background="@color/color_background"
     tools:context=".ui.map.MapActivity">
 
-    <View
-        android:id="@+id/headerBackground"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarMap"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/color_primary"
+        app:title="@string/map_title"
+        app:titleTextColor="@color/text_on_primary"
+        app:navigationIconTint="@color/text_on_primary"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textMapPlaceName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/text_on_primary"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/headerBackground"
-        tools:text="Nombre del Lugar" />
 
     <org.maplibre.android.maps.MapView
         android:id="@+id/mapView"
@@ -37,6 +24,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBackground" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarMap" />
+
+    <!-- Zoom Controls -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabZoomIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/zoom_in"
+            android:src="@android:drawable/ic_input_add"
+            app:fabSize="mini"
+            app:tint="@color/text_on_primary"
+            android:backgroundTint="@color/color_primary" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabZoomOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/zoom_out"
+            android:src="@android:drawable/ic_input_delete"
+            app:fabSize="mini"
+            app:tint="@color/text_on_primary"
+            android:backgroundTint="@color/color_primary" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

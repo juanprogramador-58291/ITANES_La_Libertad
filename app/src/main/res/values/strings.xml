@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ITANES_ La_Libertad</string>
+    <string name="tour_name">Ruta Histórica de La Libertad</string>
+    <string name="course_title">Trabajo Final - Desarrollo de Aplicaciones Móviles</string>
+    <string name="places_count">5 puntos turísticos</string>
+    <string name="button_explore">Explorar recorrido</string>
+
+    <!-- Nuevos textos para Tanda 05 -->
+    <string name="places_discover_count">5 lugares para descubrir</string>
+
+    <!-- Nuevos textos para Tanda 06 -->
+    <string name="detail_title">Detalle del Lugar</string>
+    <string name="label_address">Dirección:</string>
+    <string name="label_coordinates">Coordenadas:</string>
+    <string name="btn_favorite">♡ Guardar en favoritos</string>
+    <string name="btn_remove_favorite">♥ Quitar de favoritos</string>
+    <string name="btn_share">Compartir</string>
+    <string name="btn_view_map">Ver en mapa</string>
+    <string name="error_invalid_id">ID de lugar no válido.</string>
+    <string name="error_place_not_found">El punto turístico no existe en la base de datos.</string>
+
+    <!-- Nuevos textos para Tanda 08 -->
+    <string name="chooser_share_title">Compartir lugar con...</string>
+    <string name="error_no_share_app">No se encontró una aplicación compatible para compartir.</string>
+    <string name="share_template_footer">Compartido desde %1$s.</string>
+
+    <!-- Nuevos textos para Tanda 09 -->
+    <string name="map_screen_title">Ubicación del Atractivo</string>
+    <string name="error_invalid_coordinates">Coordenadas del lugar no válidas.</string>
+
+    <!-- Nuevos textos para Tanda 9.2 (Accesibilidad) -->
+    <string name="btn_back_description">Volver a la pantalla anterior</string>
+    <string name="zoom_in_description">Acercar mapa</string>
+    <string name="zoom_out_description">Alejar mapa</string>
+</resources>

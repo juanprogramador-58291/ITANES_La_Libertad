@@ -26,4 +26,8 @@ public class FavoriteRepository {
     public boolean isFavorite(int placeId) {
         return favoriteDao.isFavorite(placeId) > 0;
     }
+
+    public java.util.List<com.example.itanes_la_libertad.data.local.entity.PlaceEntity> getFavoritePlaces() {
+        return favoriteDao.getFavoritePlaces();
+    }
 }

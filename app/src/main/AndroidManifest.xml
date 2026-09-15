@@ -29,6 +29,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.favorites.FavoritesActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.detail.PlaceDetailActivity"
             android:exported="false" />
 

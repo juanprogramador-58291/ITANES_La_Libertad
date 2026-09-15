@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.itanes_la_libertad.data.local.entity.FavoriteEntity;
+import com.example.itanes_la_libertad.data.local.entity.PlaceEntity;
 
 import java.util.List;
 
@@ -27,4 +28,8 @@ public interface FavoriteDao {
     // 4. Obtener todos los IDs de lugares favoritos
     @Query("SELECT placeId FROM favorites")
     List<Integer> getAllFavoriteIds();
+
+    // 5. Obtener todos los lugares turísticos marcados como favoritos usando un SQL JOIN
+    @Query("SELECT places.* FROM places INNER JOIN favorites ON places.id = favorites.placeId ORDER BY favorites.createdAt DESC")
+    List<com.example.itanes_la_libertad.data.local.entity.PlaceEntity> getFavoritePlaces();
 }

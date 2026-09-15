@@ -54,6 +54,10 @@ dependencies {
     // MapLibre Native SDK
     implementation(libs.maplibre.sdk)
 
+    // Retrofit and Gson
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+
     // Tests
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)

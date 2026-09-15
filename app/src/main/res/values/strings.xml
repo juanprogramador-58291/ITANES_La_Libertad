@@ -40,4 +40,9 @@
     <string name="favorites_title">Mis Favoritos</string>
     <string name="favorites_empty_title">Aún no tienes lugares favoritos</string>
     <string name="favorites_empty_subtitle">Guarda lugares para encontrarlos rápidamente aquí</string>
+
+    <!-- Nuevos textos para Tanda 13 -->
+    <string name="btn_get_directions">Cómo llegar</string>
+    <string name="error_invalid_location">No hay una ubicación válida disponible para este lugar.</string>
+    <string name="error_no_maps_app">No se encontró ninguna aplicación o navegador compatible para calcular la ruta.</string>
 </resources>

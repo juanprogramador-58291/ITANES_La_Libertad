@@ -40,6 +40,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
     private Button buttonFavorite;
     private Button buttonShare;
     private Button buttonViewMap;
+    private Button buttonGetDirections;
 
     private PlaceRepository placeRepository;
     private FavoriteRepository favoriteRepository;
@@ -68,6 +69,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
         buttonFavorite = findViewById(R.id.buttonFavorite);
         buttonShare = findViewById(R.id.buttonShare);
         buttonViewMap = findViewById(R.id.buttonViewMap);
+        buttonGetDirections = findViewById(R.id.buttonGetDirections);
 
         placeRepository = new PlaceRepository(this);
         favoriteRepository = new FavoriteRepository(this);
@@ -108,6 +110,9 @@ public class PlaceDetailActivity extends AppCompatActivity {
                         mapIntent.putExtra(EXTRA_PLACE_ID, place.getId());
                         startActivity(mapIntent);
                     });
+
+                    // Configurar la acción de cómo llegar (navegación externa)
+                    buttonGetDirections.setOnClickListener(v -> navigateToPlace(place));
                 } else {
                     showErrorAndExit(getString(R.string.error_place_not_found));
                 }
@@ -178,6 +183,36 @@ public class PlaceDetailActivity extends AppCompatActivity {
             startActivity(chooserIntent);
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.error_no_share_app), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void navigateToPlace(PlaceEntity place) {
+        if (place == null) return;
+
+        double latitude = place.getLatitude();
+        double longitude = place.getLongitude();
+
+        // Paso 4 — Validación de coordenadas
+        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+            Toast.makeText(this, getString(R.string.error_invalid_location), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Paso 5 — Construir URL de navegación externa dinámicamente
+        String url = "https://www.google.com/maps/dir/?api=1&destination=" + latitude + "," + longitude + "&travelmode=driving";
+        
+        android.net.Uri uri = android.net.Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+        // Paso 6 y 7 — No forzar Google Maps y manejo de ausencia de aplicación compatible
+        try {
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, getString(R.string.error_no_maps_app), Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.error_no_maps_app), Toast.LENGTH_LONG).show();
         }
     }
 

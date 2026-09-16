@@ -28,6 +28,9 @@ public class PlacesActivity extends AppCompatActivity {
     private ExecutorService executorService;
     private Handler mainHandler;
     private BottomNavigationView bottomNavigationView;
+    
+    private android.widget.ProgressBar progressBarPlaces;
+    private android.widget.LinearLayout layoutEmptyPlaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class PlacesActivity extends AppCompatActivity {
 
         recyclerViewPlaces = findViewById(R.id.recyclerViewPlaces);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+        progressBarPlaces = findViewById(R.id.progressBarPlaces);
+        layoutEmptyPlaces = findViewById(R.id.layoutEmptyPlaces);
         
         placeAdapter = new PlaceAdapter(new ArrayList<>(), placeId -> {
             Intent intent = new Intent(PlacesActivity.this, PlaceDetailActivity.class);
@@ -74,14 +79,26 @@ public class PlacesActivity extends AppCompatActivity {
     }
 
     private void loadPlacesFromRoom() {
+        android.util.Log.d("ITANES_UI", "Iniciando carga de lugares desde Room");
+        if (progressBarPlaces != null) progressBarPlaces.setVisibility(android.view.View.VISIBLE);
+        if (recyclerViewPlaces != null) recyclerViewPlaces.setVisibility(android.view.View.GONE);
+        if (layoutEmptyPlaces != null) layoutEmptyPlaces.setVisibility(android.view.View.GONE);
+
         executorService.execute(() -> {
             // Consulta a Room fuera del hilo principal
             final List<PlaceEntity> placesList = placeRepository.getAllPlaces();
             
             // Actualizar la UI en el hilo principal
             mainHandler.post(() -> {
-                if (placesList != null) {
+                if (progressBarPlaces != null) progressBarPlaces.setVisibility(android.view.View.GONE);
+                
+                if (placesList != null && !placesList.isEmpty()) {
+                    if (recyclerViewPlaces != null) recyclerViewPlaces.setVisibility(android.view.View.VISIBLE);
+                    if (layoutEmptyPlaces != null) layoutEmptyPlaces.setVisibility(android.view.View.GONE);
                     placeAdapter.updateList(placesList);
+                } else {
+                    if (recyclerViewPlaces != null) recyclerViewPlaces.setVisibility(android.view.View.GONE);
+                    if (layoutEmptyPlaces != null) layoutEmptyPlaces.setVisibility(android.view.View.VISIBLE);
                 }
             });
         });

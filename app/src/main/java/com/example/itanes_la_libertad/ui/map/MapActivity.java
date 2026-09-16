@@ -68,7 +68,7 @@ public class MapActivity extends AppCompatActivity {
 
         int placeId = getIntent().getIntExtra(PlaceDetailActivity.EXTRA_PLACE_ID, -1);
 
-        if (placeId == -1) {
+        if (placeId <= 0) {
             Toast.makeText(this, getString(R.string.error_invalid_id), Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -96,8 +96,8 @@ public class MapActivity extends AppCompatActivity {
         double lat = place.getLatitude();
         double lon = place.getLongitude();
 
-        // Validar coordenadas (-90 a 90 para latitud, -180 a 180 para longitud)
-        if (lat < -90.0 || lat > 90.0 || lon < -180.0 || lon > 180.0) {
+        // Validar coordenadas usando el centralizado LocationValidator
+        if (!com.example.itanes_la_libertad.LocationValidator.isValid(lat, lon)) {
             Toast.makeText(this, getString(R.string.error_invalid_coordinates), Toast.LENGTH_LONG).show();
             finish();
             return;

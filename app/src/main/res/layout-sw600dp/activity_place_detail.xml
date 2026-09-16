@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="32dp">
 
         <ImageButton
             android:id="@+id/btnDetailBack"
@@ -22,158 +22,167 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardImageDetail"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnDetailBack">
+        <!-- Guía central para dividir en 2 columnas en Tablet (sw600dp) -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
 
-            <ImageView
-                android:id="@+id/imageDetailPlace"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@android:drawable/ic_menu_gallery"
-                android:contentDescription="@string/detail_title" />
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/imageDetailPlace"
+            android:layout_width="0dp"
+            android:layout_height="320dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:contentDescription="@string/detail_title"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDetailBack" />
 
         <TextView
             android:id="@+id/textDetailName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/color_primary"
-            android:textSize="26sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardImageDetail" />
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textDetailShortDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:textColor="@color/text_primary"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textDetailName" />
 
         <TextView
             android:id="@+id/textDetailDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"
-            android:lineSpacingMultiplier="1.2"
+            android:textSize="17sp"
+            android:lineSpacingMultiplier="1.3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textDetailShortDescription" />
 
         <TextView
             android:id="@+id/textDetailAddressLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/label_address"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textDetailDescription" />
 
         <TextView
             android:id="@+id/textDetailAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textDetailAddressLabel" />
 
         <TextView
             android:id="@+id/textDetailCoordinatesLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="@string/label_coordinates"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textDetailAddress" />
 
         <TextView
             android:id="@+id/textDetailCoordinates"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textDetailCoordinatesLabel" />
 
+        <!-- Columna de acciones en la parte inferior o distribuidas proporcionalmente -->
         <Button
             android:id="@+id/buttonFavorite"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:minHeight="48dp"
             android:text="@string/btn_favorite"
             android:textColor="@color/text_on_primary"
+            android:textSize="16sp"
             app:backgroundTint="@color/color_primary"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonShare"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textDetailCoordinates" />
+            app:layout_constraintTop_toBottomOf="@+id/imageDetailPlace"
+            android:layout_marginEnd="12dp"/>
 
         <Button
             android:id="@+id/buttonShare"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:minHeight="48dp"
             android:text="@string/btn_share"
             android:textColor="@color/text_on_primary"
+            android:textSize="16sp"
             app:backgroundTint="@color/color_secondary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonFavorite" />
+            app:layout_constraintStart_toEndOf="@+id/buttonFavorite"
+            app:layout_constraintTop_toBottomOf="@+id/imageDetailPlace"
+            android:layout_marginStart="12dp"/>
 
         <Button
             android:id="@+id/buttonViewMap"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:minHeight="48dp"
             android:text="@string/btn_view_map"
             android:textColor="@color/text_on_primary"
+            android:textSize="16sp"
             app:backgroundTint="@color/color_primary_dark"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonGetDirections"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonShare" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonFavorite"
+            android:layout_marginEnd="12dp"/>
 
         <Button
             android:id="@+id/buttonGetDirections"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
             android:minHeight="48dp"
             android:text="@string/btn_get_directions"
             android:textColor="@color/text_on_primary"
+            android:textSize="16sp"
             app:backgroundTint="@color/color_primary"
             app:icon="@drawable/ic_directions"
             app:iconGravity="textStart"
@@ -181,8 +190,9 @@
             app:iconTint="@color/text_on_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonViewMap"
+            app:layout_constraintStart_toEndOf="@+id/buttonViewMap"
+            app:layout_constraintTop_toBottomOf="@+id/buttonShare"
+            android:layout_marginStart="12dp"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,27 +37,54 @@ public class PlaceRepository {
     }
 
     public void insertPlaces(List<PlaceEntity> places) {
-        placeDao.insertPlaces(places);
+        try {
+            placeDao.insertPlaces(places);
+        } catch (Exception e) {
+            Log.e("ITANES_ROOM", "Error al insertar lugares: " + e.getMessage(), e);
+        }
     }
 
     public void insertPlace(PlaceEntity place) {
-        placeDao.insertPlace(place);
+        try {
+            placeDao.insertPlace(place);
+        } catch (Exception e) {
+            Log.e("ITANES_ROOM", "Error al insertar lugar: " + e.getMessage(), e);
+        }
     }
 
     public List<PlaceEntity> getAllPlaces() {
-        return placeDao.getAllPlaces();
+        try {
+            return placeDao.getAllPlaces();
+        } catch (Exception e) {
+            Log.e("ITANES_ROOM", "Error al obtener todos los lugares: " + e.getMessage(), e);
+            return null;
+        }
     }
 
     public PlaceEntity getPlaceById(int id) {
-        return placeDao.getPlaceById(id);
+        try {
+            return placeDao.getPlaceById(id);
+        } catch (Exception e) {
+            Log.e("ITANES_ROOM", "Error al obtener lugar por id: " + e.getMessage(), e);
+            return null;
+        }
     }
 
     public void deleteAllPlaces() {
-        placeDao.deleteAllPlaces();
+        try {
+            placeDao.deleteAllPlaces();
+        } catch (Exception e) {
+            Log.e("ITANES_ROOM", "Error al borrar todos los lugares: " + e.getMessage(), e);
+        }
     }
 
     public int getPlacesCount() {
-        return placeDao.getPlacesCount();
+        try {
+            return placeDao.getPlacesCount();
+        } catch (Exception e) {
+            Log.e("ITANES_ROOM", "Error al obtener conteo de lugares: " + e.getMessage(), e);
+            return 0;
+        }
     }
 
     public void syncPlaces(OnSyncCompleteListener listener) {
@@ -68,11 +95,11 @@ public class PlaceRepository {
         call.enqueue(new Callback<List<PlaceRemoteDto>>() {
             @Override
             public void onResponse(Call<List<PlaceRemoteDto>> call, Response<List<PlaceRemoteDto>> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()) {
                     List<PlaceRemoteDto> remotePlaces = response.body();
-                    Log.i(SYNC_TAG, "ITANES_SYNC: " + remotePlaces.size() + " lugares recibidos");
+                    if (remotePlaces != null && !remotePlaces.isEmpty()) {
+                        Log.i(SYNC_TAG, "ITANES_SYNC: " + remotePlaces.size() + " lugares recibidos");
 
-                    if (!remotePlaces.isEmpty()) {
                         executorService.execute(() -> {
                             try {
                                 List<PlaceEntity> placesEntities = PlaceMapper.toEntityList(remotePlaces);
@@ -84,23 +111,22 @@ public class PlaceRepository {
                                     listener.onSyncSuccess();
                                 }
                             } catch (Exception e) {
-                                Log.e(SYNC_TAG, "ITANES_SYNC: Excepción al guardar en Room: " + e.getMessage(), e);
+                                Log.e("ITANES_ROOM", "ITANES_SYNC: Excepción al guardar en Room: " + e.getMessage(), e);
                                 if (listener != null) {
                                     listener.onSyncFailure(e.getMessage());
                                 }
                             }
                         });
                     } else {
-                        Log.i(SYNC_TAG, "ITANES_SYNC: Lista vacía recibida de la API");
+                        Log.i(SYNC_TAG, "ITANES_SYNC: Respuesta vacía, se conservan datos locales");
                         if (listener != null) {
                             listener.onSyncSuccess();
                         }
                     }
                 } else {
-                    String errorMsg = "Respuesta HTTP no exitosa. Código: " + response.code();
-                    Log.e(SYNC_TAG, "ITANES_SYNC: " + errorMsg);
+                    Log.e(SYNC_TAG, "ITANES_SYNC: Error HTTP " + response.code());
                     if (listener != null) {
-                        listener.onSyncFailure(errorMsg);
+                        listener.onSyncFailure("Error HTTP " + response.code());
                     }
                 }
             }

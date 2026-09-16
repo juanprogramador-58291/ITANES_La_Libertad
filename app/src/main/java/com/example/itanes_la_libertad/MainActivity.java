@@ -3,6 +3,7 @@ package com.example.itanes_la_libertad;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Disparar la sincronización simple al iniciar la aplicación a través del Repository
         PlaceRepository placeRepository = new PlaceRepository(this);
-        placeRepository.syncPlaces(null);
+        placeRepository.syncPlaces(new PlaceRepository.OnSyncCompleteListener() {
+            @Override
+            public void onSyncSuccess() {
+                // Sincronización silenciosa completada con éxito
+            }
+
+            @Override
+            public void onSyncFailure(String error) {
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, getString(R.string.sync_offline_message), Toast.LENGTH_LONG).show();
+                });
+            }
+        });
 
         // Configuración de la Navegación Inferior
         bottomNavigationView = findViewById(R.id.bottomNavigation);

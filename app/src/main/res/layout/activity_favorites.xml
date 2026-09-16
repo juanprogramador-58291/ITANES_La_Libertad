@@ -39,10 +39,10 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:src="@drawable/ic_favorite"
-            app:tint="@color/text_secondary"
+            app:tint="@color/color_secondary"
             android:contentDescription="@string/favorites_empty_title" />
 
         <TextView
@@ -83,6 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/color_surface"
+        app:itemIconTint="@drawable/nav_item_color_state"
+        app:itemTextColor="@drawable/nav_item_color_state"
         app:elevation="8dp"
         app:menu="@menu/bottom_navigation_menu"
         app:labelVisibilityMode="labeled" />

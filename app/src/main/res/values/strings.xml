@@ -4,6 +4,7 @@
     <string name="course_title">Trabajo Final - Desarrollo de Aplicaciones Móviles</string>
     <string name="places_count">5 puntos turísticos</string>
     <string name="button_explore">Explorar recorrido</string>
+    <string name="welcome_hero_title">¡BIENVENIDO A LA LIBERTAD!</string>
 
     <!-- Nuevos textos para Tanda 05 -->
     <string name="places_discover_count">5 lugares para descubrir</string>
@@ -45,4 +46,11 @@
     <string name="btn_get_directions">Cómo llegar</string>
     <string name="error_invalid_location">No hay una ubicación válida disponible para este lugar.</string>
     <string name="error_no_maps_app">No se encontró ninguna aplicación o navegador compatible para calcular la ruta.</string>
+
+    <!-- Nuevos textos para Tanda 14 -->
+    <string name="empty_places_title">No hay lugares disponibles</string>
+    <string name="empty_places_subtitle">Intenta nuevamente cuando tengas conexión a Internet.</string>
+    <string name="sync_offline_message">Sin conexión. Mostrando datos guardados.</string>
+    <string name="error_load_place_detail">No se pudo cargar la información del lugar.</string>
+    <string name="error_no_compatible_maps_app">No se encontró una aplicación compatible para abrir la ruta.</string>
 </resources>

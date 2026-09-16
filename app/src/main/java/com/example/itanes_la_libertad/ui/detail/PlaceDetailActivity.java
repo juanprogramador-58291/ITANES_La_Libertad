@@ -78,8 +78,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
         placeId = getIntent().getIntExtra(EXTRA_PLACE_ID, INVALID_ID);
 
-        if (placeId == INVALID_ID) {
-            showErrorAndExit(getString(R.string.error_invalid_id));
+        if (placeId <= 0) {
+            showErrorAndExit(getString(R.string.error_load_place_detail));
             return;
         }
 
@@ -114,7 +114,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
                     // Configurar la acción de cómo llegar (navegación externa)
                     buttonGetDirections.setOnClickListener(v -> navigateToPlace(place));
                 } else {
-                    showErrorAndExit(getString(R.string.error_place_not_found));
+                    showErrorAndExit(getString(R.string.error_load_place_detail));
                 }
             });
         });
@@ -192,8 +192,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
         double latitude = place.getLatitude();
         double longitude = place.getLongitude();
 
-        // Paso 4 — Validación de coordenadas
-        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+        // Paso 4 — Validación de coordenadas usando el centralizado LocationValidator
+        if (!com.example.itanes_la_libertad.LocationValidator.isValid(latitude, longitude)) {
             Toast.makeText(this, getString(R.string.error_invalid_location), Toast.LENGTH_LONG).show();
             return;
         }
@@ -206,13 +206,9 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
         // Paso 6 y 7 — No forzar Google Maps y manejo de ausencia de aplicación compatible
         try {
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, getString(R.string.error_no_maps_app), Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, getString(R.string.error_no_maps_app), Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.error_no_compatible_maps_app), Toast.LENGTH_LONG).show();
         }
     }
 

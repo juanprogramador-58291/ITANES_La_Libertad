@@ -1,5 +1,6 @@
 package com.example.itanes_la_libertad.ui.map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -75,6 +76,37 @@ public class MapActivity extends AppCompatActivity {
         }
 
         loadPlaceAndSetupMap(placeId);
+
+        // Configuración de la Navegación Inferior (Requerimiento visual de la referencia)
+        setupBottomNavigation();
+    }
+
+    private void setupBottomNavigation() {
+        android.view.View bottomNav = findViewById(R.id.bottomNavigation);
+        if (bottomNav instanceof com.google.android.material.bottomnavigation.BottomNavigationView) {
+            com.google.android.material.bottomnavigation.BottomNavigationView navigationView = (com.google.android.material.bottomnavigation.BottomNavigationView) bottomNav;
+            navigationView.setSelectedItemId(R.id.nav_places); 
+            navigationView.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_home) {
+                    Intent intent = new Intent(this, com.example.itanes_la_libertad.MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.nav_places) {
+                    Intent intent = new Intent(this, com.example.itanes_la_libertad.PlacesActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.nav_favorites) {
+                    Intent intent = new Intent(this, com.example.itanes_la_libertad.ui.favorites.FavoritesActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 
     private void loadPlaceAndSetupMap(int placeId) {

@@ -19,6 +19,7 @@ import com.example.itanes_la_libertad.data.local.entity.PlaceEntity;
 import com.example.itanes_la_libertad.data.repository.FavoriteRepository;
 import com.example.itanes_la_libertad.data.repository.PlaceRepository;
 import com.example.itanes_la_libertad.ui.map.MapActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,8 +38,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
     private TextView textDetailAddress;
     private TextView textDetailCoordinates;
     private ImageView imageDetailPlace;
-    private Button buttonFavorite;
-    private Button buttonShare;
+    private android.view.View buttonFavorite;
+    private android.view.View buttonShare;
     private Button buttonViewMap;
     private Button buttonGetDirections;
 
@@ -87,6 +88,37 @@ public class PlaceDetailActivity extends AppCompatActivity {
         buttonFavorite.setOnClickListener(v -> toggleFavorite());
 
         loadPlaceDetails(placeId);
+
+        // Configuración de la Navegación Inferior (Requerimiento visual de la referencia)
+        setupBottomNavigation();
+    }
+
+    private void setupBottomNavigation() {
+        android.view.View bottomNav = findViewById(R.id.bottomNavigation);
+        if (bottomNav instanceof BottomNavigationView) {
+            BottomNavigationView navigationView = (BottomNavigationView) bottomNav;
+            navigationView.setSelectedItemId(R.id.nav_places); // Estamos en el detalle de un lugar
+            navigationView.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_home) {
+                    Intent intent = new Intent(this, com.example.itanes_la_libertad.MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.nav_places) {
+                    Intent intent = new Intent(this, com.example.itanes_la_libertad.PlacesActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.nav_favorites) {
+                    Intent intent = new Intent(this, com.example.itanes_la_libertad.ui.favorites.FavoritesActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 
     private void loadPlaceDetails(int placeId) {
@@ -138,10 +170,20 @@ public class PlaceDetailActivity extends AppCompatActivity {
     }
 
     private void updateFavoriteButtonVisuals() {
-        if (isFavorite) {
-            buttonFavorite.setText(getString(R.string.btn_remove_favorite));
-        } else {
-            buttonFavorite.setText(getString(R.string.btn_favorite));
+        if (buttonFavorite instanceof android.widget.ImageButton) {
+            android.widget.ImageButton imgBtn = (android.widget.ImageButton) buttonFavorite;
+            if (isFavorite) {
+                imgBtn.setImageResource(android.R.drawable.btn_star_big_on);
+            } else {
+                imgBtn.setImageResource(android.R.drawable.btn_star_big_off);
+            }
+        } else if (buttonFavorite instanceof Button) {
+            Button btn = (Button) buttonFavorite;
+            if (isFavorite) {
+                btn.setText(getString(R.string.btn_remove_favorite));
+            } else {
+                btn.setText(getString(R.string.btn_favorite));
+            }
         }
     }
 

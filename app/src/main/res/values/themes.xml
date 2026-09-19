@@ -10,5 +10,11 @@
         <item name="colorError">@color/color_error</item>
     </style>
 
+    <style name="App.CustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/color_nav_indicator</item>
+        <item name="android:width">60dp</item>
+        <item name="android:height">40dp</item>
+    </style>
+
     <style name="Theme.ITANES_La_Libertad" parent="Base.Theme.ITANES_La_Libertad" />
 </resources>

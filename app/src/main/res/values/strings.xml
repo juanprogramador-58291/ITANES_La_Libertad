@@ -4,7 +4,9 @@
     <string name="course_title">Trabajo Final - Desarrollo de Aplicaciones Móviles</string>
     <string name="places_count">5 puntos turísticos</string>
     <string name="button_explore">Explorar recorrido</string>
-    <string name="welcome_hero_title">¡BIENVENIDO A LA LIBERTAD!</string>
+    <string name="welcome_hero_title">¡Bienvenido a\nLa Libertad!</string>
+    <string name="hero_decorative_text">La historia\nvive aquí</string>
+    <string name="search_hint">Buscar lugares, experiencias...</string>
 
     <!-- Nuevos textos para Tanda 05 -->
     <string name="places_discover_count">5 lugares para descubrir</string>

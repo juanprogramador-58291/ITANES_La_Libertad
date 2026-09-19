@@ -23,8 +23,8 @@
     </path>
     <path
         android:fillColor="#C58B2A"
-        android:pathData="M54,16L24,76h16l14,-28l14,28h16z" />
+        android:pathData="M54,20L58,46L78,50L58,54L54,80L50,54L30,50L50,46Z" />
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,28L34,68h10l10,-20l10,20h10z" />
+        android:pathData="M54,35L56,46L68,48L56,50L54,61L52,50L40,48L52,46Z" />
 </vector>

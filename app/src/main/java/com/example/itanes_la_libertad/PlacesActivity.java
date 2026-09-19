@@ -36,7 +36,7 @@ public class PlacesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
-
+        
         recyclerViewPlaces = findViewById(R.id.recyclerViewPlaces);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         progressBarPlaces = findViewById(R.id.progressBarPlaces);

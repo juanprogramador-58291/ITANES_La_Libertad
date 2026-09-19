@@ -6,7 +6,7 @@
     <string name="button_explore">Explorar recorrido</string>
     <string name="welcome_hero_title">¡Bienvenido a\nLa Libertad!</string>
     <string name="hero_decorative_text">La historia\nvive aquí</string>
-    <string name="search_hint">Buscar lugares, experiencias...</string>
+
 
     <!-- Nuevos textos para Tanda 05 -->
     <string name="places_discover_count">5 lugares para descubrir</string>
@@ -43,6 +43,9 @@
     <string name="favorites_title">Mis Favoritos</string>
     <string name="favorites_empty_title">Aún no tienes lugares favoritos</string>
     <string name="favorites_empty_subtitle">Guarda lugares para encontrarlos rápidamente aquí</string>
+
+    <string name="favorite_add_description">Agregar a favoritos</string>
+    <string name="favorite_remove_description">Eliminar de favoritos</string>
 
     <!-- Nuevos textos para Tanda 13 -->
     <string name="btn_get_directions">Cómo llegar</string>

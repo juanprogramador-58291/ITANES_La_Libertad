@@ -174,8 +174,12 @@ public class PlaceDetailActivity extends AppCompatActivity {
             android.widget.ImageButton imgBtn = (android.widget.ImageButton) buttonFavorite;
             if (isFavorite) {
                 imgBtn.setImageResource(android.R.drawable.btn_star_big_on);
+                imgBtn.setColorFilter(androidx.core.content.ContextCompat.getColor(this, R.color.favorite_selected));
+                imgBtn.setContentDescription(getString(R.string.favorite_remove_description));
             } else {
                 imgBtn.setImageResource(android.R.drawable.btn_star_big_off);
+                imgBtn.setColorFilter(android.graphics.Color.WHITE);
+                imgBtn.setContentDescription(getString(R.string.favorite_add_description));
             }
         } else if (buttonFavorite instanceof Button) {
             Button btn = (Button) buttonFavorite;

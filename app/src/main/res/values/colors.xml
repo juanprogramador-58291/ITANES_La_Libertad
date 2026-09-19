@@ -21,6 +21,7 @@
     <color name="badge_bg">#FFF8E1</color>
     <color name="badge_text">#C58B2A</color>
     <color name="overlay_dark">#99000000</color>
+    <color name="favorite_selected">#FFFC00</color>
 
     <!-- Mantener compatibilidad base -->
     <color name="black">#FF000000</color>
